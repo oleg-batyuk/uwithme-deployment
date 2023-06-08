@@ -5,7 +5,7 @@
 
 x-env:
     #Enable this if running in production
-    - &SSL_ENABLED "false"
+    - &SSL_ENABLED "true"
     #
     #Change this to any username
     - &POSTGRES_USER postgres
