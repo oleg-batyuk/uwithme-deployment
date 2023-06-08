@@ -13,30 +13,30 @@ x-env:
     - &POSTGRES_PASSWORD postgres
     #
     #Change this to your domain for keycloak
-    - &KEYCLOAK_HOST auth.uwm.int
+    - &KEYCLOAK_HOST auth.opscorp.net
     #Change this to any username
     - &KEYCLOAK_USER admin
     #Change this to any password (and keep it secure)
     - &KEYCLOAK_PASSWORD admin
     #
     #Change this to your domain for uwithme backend
-    - &U_WITH_ME_SERVICE_HOST service1.uwm.int
+    - &U_WITH_ME_SERVICE_HOST service1.opscorp.net
     #Change this to new secret from keycloak
     - &U_WITH_ME_SERVICE_KEYCLOAK_SECRET mwBTmK6mTIohwxzXzaf241IXuB9mnz8o
     #
     #Change this to your domain for uwithme frontend
-    - &U_WITH_ME_UI_HOST uwm.int
+    - &U_WITH_ME_UI_HOST opscorp.net
     #
     #Change this to your domain for testsystem backend
-    - &TEST_SYSTEM_SERVICE_HOST service2.uwm.int
+    - &TEST_SYSTEM_SERVICE_HOST service2.opscorp.net
     #Change this to new secret from keycloak
     - &TEST_SYSTEM_SERVICE_KEYCLOAK_SECRET RHaSmEGaKSr4LARtcqpUgBjFXB4adb4h
     #
     #Change this to your domain for uwithme frontend
-    - &TEST_SYSTEM_UI_HOST tests.uwm.int
+    - &TEST_SYSTEM_UI_HOST tests.opscorp.net
     #
     #Change this to your domain for bot system
-    - &BOT_SERVICE_HOST bot.uwm.int
+    - &BOT_SERVICE_HOST bot.opscorp.net
     #Change this to your bot username (registered with BotFather)
     - &BOT_BOT_NAME UniversityWithMe_bot
     #Change this to your bot key (registered with BotFather)
