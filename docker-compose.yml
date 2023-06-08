@@ -123,26 +123,35 @@ services:
       retries: 10
 
   uwithme-keycloak:
-    build: ./keycloak/.
+    image: quay.io/keycloak/keycloak:20.0.5
     container_name: uwithme-keycloak
     restart: always
-    ports:
-      - "8080:8080"
+    volumes:
+      - ./keycloak-config:/opt/keycloak/data/import
     environment:
       VIRTUAL_HOST: *KEYCLOAK_HOST
       VIRTUAL_PORT: 8080
       LETSENCRYPT_HOST: *KEYCLOAK_HOST
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_PROXY: edge
       KC_HOSTNAME: *KEYCLOAK_HOST
+      KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://uwithme-postgres/keycloak
       KC_DB_USERNAME: *POSTGRES_USER
       KC_DB_PASSWORD: *POSTGRES_PASSWORD
       KEYCLOAK_ADMIN: *KEYCLOAK_USER
       KEYCLOAK_ADMIN_PASSWORD: *KEYCLOAK_PASSWORD
+    command:
+      - start --import-realm
     networks:
       - uwithme-network
+    ports:
+      - "8080:8080"
     depends_on:
       uwithme-postgres:
         condition: service_healthy
+
 
   uwithme-service:
     image: ghcr.io/happymary16/uwithme-server/uwithme-service:latest
