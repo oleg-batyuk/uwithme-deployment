@@ -25,7 +25,7 @@ x-env:
     - &U_WITH_ME_SERVICE_KEYCLOAK_SECRET mwBTmK6mTIohwxzXzaf241IXuB9mnz8o
     #
     #Change this to your domain for uwithme frontend
-    - &U_WITH_ME_UI_HOST opscorp.net
+    - &U_WITH_ME_UI_HOST ui.opscorp.net
     #
     #Change this to your domain for testsystem backend
     - &TEST_SYSTEM_SERVICE_HOST service2.opscorp.net
