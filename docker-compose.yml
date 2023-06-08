@@ -5,7 +5,7 @@
 
 x-env:
     #Enable this if running in production
-    - &SSL_ENABLED "true"
+    - &SSL_ENABLED "false"
     #
     #Change this to any username
     - &POSTGRES_USER postgres
@@ -132,9 +132,9 @@ services:
       # VIRTUAL_HOST: *KEYCLOAK_HOST
       # VIRTUAL_PORT: 8080
       # LETSENCRYPT_HOST: *KEYCLOAK_HOST
-      # KC_HTTP_ENABLED: "true"
-      # KC_HOSTNAME_STRICT_HTTPS: "false"
-      PROXY_ADDRESS_FORWARDING: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      # PROXY_ADDRESS_FORWARDING: "true"
       KC_PROXY: edge
       KC_HOSTNAME: *KEYCLOAK_HOST
       KC_DB: postgres
