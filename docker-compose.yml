@@ -49,9 +49,43 @@ networks:
 
 services:
 
+  # uwithme-nginx-proxy:
+  #   build: ./nginx-proxy/.
+  #   container_name: uwithme-nginx-proxy
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   networks:
+  #     uwithme-network:
+  #       aliases:
+  #         - *KEYCLOAK_HOST
+  #         - *U_WITH_ME_SERVICE_HOST
+  #         - *U_WITH_ME_UI_HOST
+  #         - *TEST_SYSTEM_SERVICE_HOST
+  #         - *TEST_SYSTEM_UI_HOST
+  #         - *BOT_SERVICE_HOST
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #     - ~/nginx-data/certs:/etc/nginx/certs
+  #     - ~/nginx-data/vhost:/etc/nginx/vhost.d
+  #     - ~/nginx-data/html:/usr/share/nginx/html
+
+  # uwithme-acme-companion:
+  #   image: nginxproxy/acme-companion:2.2.3
+  #   container_name: uwithme-acme-companion
+  #   restart: always
+  #   volumes_from:
+  #     - uwithme-nginx-proxy
+  #   networks:
+  #     - uwithme-network
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ~/nginx-data/acme:/etc/acme.sh
+
   uwithme-nginx-proxy:
     build: ./nginx-proxy/.
-    container_name: uwithme-nginx-proxy
+    container_name: uwithme-apache-proxy
     restart: always
     ports:
       - "80:80"
@@ -65,23 +99,8 @@ services:
           - *TEST_SYSTEM_SERVICE_HOST
           - *TEST_SYSTEM_UI_HOST
           - *BOT_SERVICE_HOST
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ~/nginx-data/certs:/etc/nginx/certs
-      - ~/nginx-data/vhost:/etc/nginx/vhost.d
-      - ~/nginx-data/html:/usr/share/nginx/html
-
-  uwithme-acme-companion:
-    image: nginxproxy/acme-companion:2.2.3
-    container_name: uwithme-acme-companion
-    restart: always
-    volumes_from:
-      - uwithme-nginx-proxy
-    networks:
-      - uwithme-network
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ~/nginx-data/acme:/etc/acme.sh
+    # volumes:
+    #   - $(pwd)/:/usr/local/apache2/htdocs
 
   uwithme-postgres:
     image: postgres:15.2

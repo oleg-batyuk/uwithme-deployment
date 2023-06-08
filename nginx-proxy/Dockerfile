@@ -1,7 +1,15 @@
-FROM nginx:alpine
+FROM ubuntu:20.04
 
-COPY ./nginx.conf /etc/nginx/conf.d/nginx.conf
+ENV TZ=Europe/Kiev
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-EXPOSE 80/tcp
+RUN apt-get update
 
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+RUN apt-get install -y apache2
+
+COPY ./apache.conf /etc/apache2/site-enabled/apache.conf
+
+EXPOSE 80
+EXPOSE 8443
+
+CMD ["/usr/sbin/apache2ctl", "-D","FOREGROUND"]
